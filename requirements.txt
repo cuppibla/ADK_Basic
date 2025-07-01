@@ -1,0 +1,10 @@
+# Google AI Development Kit (ADK) dependencies
+google-adk>=0.1.0
+
+# Additional dependencies that might be needed
+python-dotenv>=1.0.0
+
+# Development dependencies (optional)
+pytest>=7.0.0
+black>=23.0.0
+flake8>=6.0.0
