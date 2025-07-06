@@ -15,6 +15,15 @@ REM Get Python version
 for /f "tokens=2" %%i in ('python --version 2^>^&1') do set python_version=%%i
 echo ✅ Python %python_version% detected
 
+REM Check which version of google-adk will be installed
+python -c "import sys; exit(0 if sys.version_info >= (3, 9) else 1)" >nul 2>&1
+if %errorlevel% equ 0 (
+    echo 🎯 Python %python_version% >= 3.9 → Will install google-adk==1.5.0 (latest version)
+) else (
+    echo ⚠️  Python %python_version% < 3.9 → Will install google-adk==0.3.0 (compatible version)
+    echo    For the latest features, consider upgrading to Python 3.9 or higher
+)
+
 REM Create virtual environment
 echo 📦 Creating virtual environment...
 python -m venv .adk_env

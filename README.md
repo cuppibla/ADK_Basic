@@ -14,6 +14,8 @@ A specialized AI agent built with Google's AI Development Kit (ADK) that generat
 ## Prerequisites
 
 - Python 3.8 or higher
+  - **Python 3.9+**: Installs google-adk==1.5.0 (latest version with full features)
+  - **Python 3.8**: Installs google-adk==0.3.0 (compatible version)
 - Google ADK access and credentials
 - Internet connection for Google Search functionality
 
