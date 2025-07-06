@@ -19,7 +19,9 @@ A specialized AI agent built with Google's AI Development Kit (ADK) that generat
 
 ## Quick Setup
 
-### Option 1: Automated Setup (Recommended)
+### For Mac/Linux Users
+
+#### Option 1: Automated Setup (Recommended)
 
 1. **Clone or download this project**
 2. **Run the setup script**:
@@ -29,15 +31,17 @@ A specialized AI agent built with Google's AI Development Kit (ADK) that generat
    ```
 3. **Activate the environment**:
    ```bash
-   source adk_env/bin/activate
+   source .adk_env/bin/activate
    ```
 
-### Option 2: Manual Setup
+**⚠️ Important:** After setup, don't forget to [configure your environment variables](#configure-environment-variables) before running the agent!
+
+#### Option 2: Manual Setup
 
 1. **Create virtual environment**:
    ```bash
-   python3 -m venv adk_env
-   source adk_env/bin/activate  # On Windows: adk_env\Scripts\activate
+   python3 -m venv .adk_env
+   source .adk_env/bin/activate
    ```
 
 2. **Install dependencies**:
@@ -45,6 +49,109 @@ A specialized AI agent built with Google's AI Development Kit (ADK) that generat
    pip install --upgrade pip
    pip install -r requirements.txt
    ```
+
+**⚠️ Important:** After installation, don't forget to [configure your environment variables](#configure-environment-variables) before running the agent!
+
+### For Windows Users
+
+#### Option 1: Automated Setup (Recommended)
+
+1. **Clone or download this project**
+2. **Open Command Prompt** in the project directory
+3. **Run the setup script**:
+   ```cmd
+   setup_venv.bat
+   ```
+
+**⚠️ Important:** After setup, don't forget to [configure your environment variables](#configure-environment-variables) before running the agent!
+
+#### Option 2: Manual Setup
+
+1. **Clone or download this project**
+2. **Open Command Prompt or PowerShell** in the project directory
+3. **Create virtual environment**:
+   ```cmd
+   python -m venv .adk_env
+   ```
+
+4. **Activate virtual environment**:
+   - **Command Prompt**:
+     ```cmd
+     .adk_env\Scripts\activate
+     ```
+   - **PowerShell**:
+     ```powershell
+     .adk_env\Scripts\Activate.ps1
+     ```
+
+5. **Install dependencies**:
+   ```cmd
+   pip install --upgrade pip
+   pip install -r requirements.txt
+   ```
+
+**⚠️ Important:** After installation, don't forget to [configure your environment variables](#configure-environment-variables) before running the agent!
+
+### Configure Environment Variables
+
+**Step 4: Create Environment Configuration**
+
+1. **Create the .env file** in the `agent/` directory:
+
+   **Mac/Linux:**
+   ```bash
+   touch agent/.env
+   ```
+
+   **Windows:**
+   ```cmd
+   type nul > agent\.env
+   ```
+
+2. **Edit the .env file** and add the following:
+   ```env
+   GOOGLE_GENAI_USE_VERTEXAI=FALSE
+   GOOGLE_API_KEY=your_actual_api_key_here
+   ```
+
+   **Important:** Replace `your_actual_api_key_here` with your actual API key from Google AI Studio.
+
+### Running the Agent
+
+After setup and configuration (on both platforms):
+
+1. **Activate virtual environment** (if not already active):
+
+   **Mac/Linux:**
+   ```bash
+   source .adk_env/bin/activate
+   ```
+
+   **Windows Command Prompt:**
+   ```cmd
+   .adk_env\Scripts\activate
+   ```
+
+   **Windows PowerShell:**
+   ```powershell
+   .adk_env\Scripts\Activate.ps1
+   ```
+
+2. **Run the ADK web interface**:
+   ```bash
+   adk web
+   ```
+
+You should see `(.adk_env)` at the beginning of your terminal prompt, indicating the virtual environment is active.
+
+### Deactivating the Environment
+
+When you're done working with the project:
+```bash
+deactivate
+```
+
+This command works the same on both Mac/Linux and Windows. You'll notice the `(.adk_env)` prefix disappears from your terminal prompt.
 
 ## Configuration
 
@@ -60,12 +167,21 @@ A specialized AI agent built with Google's AI Development Kit (ADK) that generat
    - Ensure you have access to Gemini 2.0 Flash model
    - Configure Google Search tool access
 
-3. **Environment Variables** (optional):
-   Create a `.env` file in the project root:
+3. **Get Google AI Studio API Key**:
+   - Go to [Google AI Studio](https://aistudio.google.com/)
+   - Create an account or sign in
+   - Navigate to API Keys section
+   - Create a new API key
+   - Copy the API key for use in the next step
+
+4. **Environment Variables** (required):
+   Create a `.env` file in the `agent/` directory:
    ```env
-   # Add any required environment variables here
-   GOOGLE_API_KEY=your_api_key_here
+   GOOGLE_GENAI_USE_VERTEXAI=FALSE
+   GOOGLE_API_KEY=your_actual_api_key_here
    ```
+
+   **Important:** Replace `your_actual_api_key_here` with your actual API key from Google AI Studio.
 
 ## Usage
 
@@ -113,7 +229,8 @@ ADK_Basic/
 │   ├── __init__.py          # Package initialization
 │   └── day_trip.py          # Main agent definition
 ├── requirements.txt         # Python dependencies
-├── setup_venv.sh           # Virtual environment setup script
+├── setup_venv.sh           # Virtual environment setup script (Mac/Linux)
+├── setup_venv.bat          # Virtual environment setup script (Windows)
 └── README.md               # This file
 ```
 
@@ -164,19 +281,31 @@ flake8 agent/
 
 1. **Python Version Error**
    - Ensure Python 3.8+ is installed
-   - Use `python3 --version` to check
+   - Check version:
+     - **Mac/Linux**: `python3 --version`
+     - **Windows**: `python --version`
 
-2. **Google ADK Authentication**
+2. **Virtual Environment Activation Issues**
+   - **Mac/Linux**: Use `source .adk_env/bin/activate`
+   - **Windows Command Prompt**: Use `.adk_env\Scripts\activate`
+   - **Windows PowerShell**: Use `.adk_env\Scripts\Activate.ps1`
+   - If PowerShell gives execution policy error, run: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+
+3. **Google ADK Authentication**
    - Verify ADK credentials are properly configured
    - Check Google Cloud project permissions
 
-3. **Module Import Errors**
+4. **Module Import Errors**
    - Ensure virtual environment is activated
    - Reinstall requirements: `pip install -r requirements.txt`
 
-4. **Google Search Tool Issues**
+5. **Google Search Tool Issues**
    - Verify Google Search API access
    - Check network connectivity
+
+6. **Windows-Specific Issues**
+   - If you get `'python' is not recognized`, try `py` instead of `python`
+   - For PowerShell script execution issues, check execution policy settings
 
 ### Getting Help
 

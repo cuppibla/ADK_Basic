@@ -1,5 +1,6 @@
 # Virtual Environment
 adk_env/
+.adk_env/
 venv/
 env/
 .env

@@ -25,11 +25,11 @@ echo "✅ Python $python_version detected"
 
 # Create virtual environment
 echo "📦 Creating virtual environment..."
-python3 -m venv adk_env
+python3 -m venv .adk_env
 
 # Activate virtual environment
 echo "🔧 Activating virtual environment..."
-source adk_env/bin/activate
+source .adk_env/bin/activate
 
 # Upgrade pip
 echo "⬆️  Upgrading pip..."
@@ -42,7 +42,7 @@ pip install -r requirements.txt
 echo "✅ Setup complete!"
 echo ""
 echo "To activate the virtual environment in the future, run:"
-echo "   source adk_env/bin/activate"
+echo "   source .adk_env/bin/activate"
 echo ""
 echo "To deactivate the virtual environment, run:"
 echo "   deactivate"
